@@ -189,48 +189,6 @@ $(".btn").on("click", function (event) {
 
 })
 
-// function to get available hotels in area + Hotels API
-function hotels(hotelId) {
-    hotelResults.empty();
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': '0b014ef4a7msh20044d57c266fadp11ce28jsn558d2ceb2559',
-            'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
-        }
-    };
-
-    fetch('https://priceline-com-provider.p.rapidapi.com/v1/hotels/search?sort_order=HDR&location_id=' + hotelId + '&date_checkout=2022-11-16&date_checkin=2022-11-15&star_rating_ids=3.0%2C3.5%2C4.0%2C4.5%2C5.0&rooms_number=1&amenities_ids=FINTRNT%2CFBRKFST', options)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.hotels[1].name)
-            console.log(data)
-            var counter = 0;
-            var i = 0;
-            while (counter < 5) {
-                if (data?.hotels[i]?.name) {
-                    var hotelDiv = $("<div>").attr("class", "hotels m-1 equal-height", "p-4")
-                    var hotel = $("<p>").attr("class", "card-text m-1", "p-4")
-                    hotel.text(data?.hotels[i]?.name);
-                    hotelDiv.append(hotel);
-                    var starRating = $("<p>").attr("class", "card-text m-1 equal-height", "p-4")
-                    starRating.text("Star Rating: "  + data?.hotels[i]?.starRating + " out of 5 stars");
-                    var hotelImg = $("<img>").attr("src", (data?.hotels[i]?.thumbnailUrl))
-                    var hotelPrice = $("<p>").attr("class", "card-text m-1 equal-height", "p-4");
-                    hotelPrice.text("Min Price: $" + data?.hotels[i]?.ratesSummary.minPrice + " per Night")
-                    hotelDiv.append(hotelImg);
-                    hotelDiv.append(starRating);
-                    hotelDiv.append(hotelPrice);
-                    hotelResults.append(hotelDiv);
-
-                    counter++;
-                }
-                i++;
-            }
-
-        })
-
-}
 
 // function to request location id by userInput + Location API
 function requestId(userInput) {
