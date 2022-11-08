@@ -190,22 +190,3 @@ $(".btn").on("click", function (event) {
 })
 
 
-// function to request location id by userInput + Location API
-function requestId(userInput) {
-    const options1 = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': '0b014ef4a7msh20044d57c266fadp11ce28jsn558d2ceb2559',
-            'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
-        }
-    };
-    var hotelId;
-    fetch('https://priceline-com-provider.p.rapidapi.com/v1/hotels/locations?name=' + userInput + '&search_type=ALL', options1)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data[0].cityID)
-            hotelId = data[0].cityID;
-            hotels(hotelId);
-        })
-        .catch(err => console.error(err));
-}
